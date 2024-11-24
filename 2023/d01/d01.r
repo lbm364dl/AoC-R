@@ -1,15 +1,19 @@
+library("stringr")
+library("stringi")
+library("purrr")
+
 find_first <- function(inp, nums) {
   pattern <- paste(nums, collapse = "|")
   inp |>
-    stringr::str_extract_all(pattern) |>
-    lapply(\(x) match(x, nums)[1] %% 10)
+    str_extract_all(pattern) |>
+    map_int(~ match(.x, nums)[1] %% 10)
 }
 
 solve <- function(inp, nums) {
-  mapply(
-    \(x, y) 10 * x + y,
+  map2_int(
     find_first(inp, nums),
-    find_first(stringi::stri_reverse(inp), stringi::stri_reverse(nums))
+    find_first(stri_reverse(inp), stri_reverse(nums)),
+    ~ 10 * .x + .y
   ) |> sum()
 }
 
@@ -20,5 +24,5 @@ all_nums <- c(
 )
 
 inp <- readLines("2023/d01/input.txt")
-print(stringr::str_glue("Star 1: {solve(inp, digits)}"))
-print(stringr::str_glue("Star 2: {solve(inp, all_nums)}"))
+print(str_glue("Star 1: {solve(inp, digits)}"))
+print(str_glue("Star 2: {solve(inp, all_nums)}"))
