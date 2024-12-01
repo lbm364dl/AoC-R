@@ -14,11 +14,8 @@ star1 <- tibble(l1 = l1, l2 = l2) |>
   sum()
 
 star2 <- df |>
-  select(n1 = n2) |>
-  group_by(n1) |>
-  summarise(cnt = n()) |>
-  inner_join(df, by = "n1") |>
-  mutate(n1 * cnt, .keep = "none") |>
+  inner_join(df, join_by(n1 == n2)) |>
+  pull(n1) |>
   sum()
 
 print(str_glue("Star 1: {star1}"))
