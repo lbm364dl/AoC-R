@@ -1,14 +1,15 @@
 library("tibble")
 library("tidyr")
 library("dplyr")
+library("stringr")
 
-inp <- readLines("2024/d01/input.txt")
-
-df <- tibble(line = inp) |>
+df <- tibble(line = readLines("2024/d01/input.txt")) |>
   separate_wider_delim(line, "   ", names = c("n1", "n2")) |>
   mutate_all(as.integer)
 
-star1 <- tibble(l1 = sort(pull(df, n1)), l2 = sort(pull(df, n2))) |>
+l1 <- sort(pull(df, n1))
+l2 <- sort(pull(df, n2))
+star1 <- tibble(l1 = l1, l2 = l2) |>
   mutate(abs(l1 - l2), .keep = "none") |>
   sum()
 
