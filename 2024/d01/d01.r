@@ -12,14 +12,12 @@ star1 <- tibble(l1 = sort(pull(df, n1)), l2 = sort(pull(df, n2))) |>
   mutate(abs(l1 - l2), .keep = "none") |>
   sum()
 
-cnts <- df |>
+star2 <- df |>
   select(n1 = n2) |>
   group_by(n1) |>
-  summarise(cnt = n())
-
-star2 <- df |>
-  inner_join(cnts, by = "n1") |>
-  mutate(ans = n1 * cnt, .keep = "none") |>
+  summarise(cnt = n()) |>
+  inner_join(df, by = "n1") |>
+  mutate(n1 * cnt, .keep = "none") |>
   sum()
 
 print(str_glue("Star 1: {star1}"))
