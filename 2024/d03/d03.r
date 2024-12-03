@@ -15,7 +15,6 @@ star1 <- inp |>
   str_extract_all("mul\\((\\d+),\\d+\\)", simplify = TRUE) |>
   compute_result()
 
-
 star2 <- inp |>
   str_extract_all("do\\(\\)(\n|.)*?don't\\(\\)", simplify = TRUE) |>
   str_flatten() |>

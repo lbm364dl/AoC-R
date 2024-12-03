@@ -22,7 +22,6 @@ star1 <- inp |>
   str_extract_all("mul\\((\\d+),\\d+\\)", simplify = TRUE) |>
   compute_result()
 
-
 star2 <- inp |>
   str_extract_all("don't|do|mul\\((\\d+),\\d+\\)", simplify = TRUE) |>
   reduce(reduce_fun, .init = list(last_order = "do", ops = c())) |>
