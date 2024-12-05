@@ -7,6 +7,9 @@ library("purrr")
 # the statement does not say this. This makes the problem much easier.
 # But why not just mention it in the statement...
 # A solution for general inputs would require topological sorting on graphs.
+# Even then, we would still have to assume that page inputs form a simple
+# path in the topological sort graph. Otherwise the solution is not unique...
+# So... non clarified assumptions? Bad problem.
 
 inp <- read_file("2024/d05/input.txt") |>
   str_split("\n\n") |>
